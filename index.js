@@ -13,9 +13,9 @@ let tableauDateLabel = []
 //Quand nous voulons faire un forEach nous devons precisier 
 //en écrivant Array.from(dateYear).forEach(function()
 //et non dateYear.forEach
-Array.from(dateYear.children).forEach(function (date) {
-    if (date.innerHTML.length > 0) {
-        tableauDateLabel.push(parseInt(date.innerText));
+Array.from(dateYear.children).forEach(function (date) {  // créer un tableau composé de tous les enfants de "ans" ; saisir chaque élément et l'appeler "année".
+    if (date.innerHTML.length > 0) {    // si la longueur du texte intérieur de chaque "année" est supérieure à 0 (en d'autres termes, si le texte intérieur n'est PAS vide)
+        tableauDateLabel.push(parseInt(date.innerText));  // insérer dans le tableau "labelsTableauUn" la parseInt du texte intérieur de "l'année 
     }
 })
 console.log(tableauDateLabel)
