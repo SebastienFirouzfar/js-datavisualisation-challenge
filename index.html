@@ -27,6 +27,8 @@
   <link rel="stylesheet" href="./assets/font-awesome.min.css">
   <link rel="stylesheet" href="./assets/statexpflat.css">
   <link rel="stylesheet" href="./assets/statexpflat-grid.css">
+  <!--Ici on declare pour realiser nos graphiques-->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 
   <style>
     a:lang(ar),
@@ -799,7 +801,8 @@
                 <span class="mw-headline" id="Crimes_et_d.C3.A9lits_enregistr.C3.A9s_par_les_services_de_police">Crimes recorded by the police</span>
               </h3>
 
-
+              <!--Initialisation de notre graphique d'une largeur a 800 et d'una hauteur a 450 -->
+              <canvas id="line-chart" width="800" height="450"></canvas>
               <table cellspacing="0" cellpadding="0" id="table1">
                 <caption> Table 1: Offences recorded by the police, 2002-12</caption>
                 <thead>
