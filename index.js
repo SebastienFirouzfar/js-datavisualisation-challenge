@@ -7,9 +7,10 @@ function getRandomColor() {
     return color;
   }
 
-//Selectionnner le tableau d'année pour le mettre dans le graphique 
-let dateYear = document.querySelectorAll("#table1 tbody tr")[0]
+
+let dateYear = document.querySelectorAll("#table1 tbody tr")[0] //Selectionnner le tableau d'année pour le mettre dans le graphique 
 let tableauDateLabel = []
+
 //Quand nous voulons faire un forEach nous devons precisier 
 //en écrivant Array.from(dateYear).forEach(function()
 //et non dateYear.forEach
@@ -20,28 +21,38 @@ Array.from(dateYear.children).forEach(function (date) {  // créer un tableau co
 })
 console.log(tableauDateLabel)
 
-let tableau2 = []
+
+// Obtenir les données nécessaires pour les DATASETS dans un bel ensemble d'objets
+
+let tableau2 = [] // Ici nous voulons insérer tous les objets qui contiendront les propriétés(4) : data, label, borderColor et fill.
+
 // pour avoir les données de chaque pays nous devons faire celà 
-dataset = Array.from(document.querySelectorAll("#table1 tbody tr"))
+// créer un tableau composé de tous les <tr> y compris tous ses éléments enfants.
+dataset = Array.from(document.querySelectorAll("#table1 tbody tr")) 
 
-//on supprime le 1er elt
-dataset.shift()
+dataset.shift() //on supprime le 1er elt
 
+ // saisir chaque élément du tableau 'dataset' = chaque ligne du tableau > et l'appeler 'datas'.
 dataset.forEach(function (datas) {
-    let object = {}
-    let arData = []
-    //declarons un tableau d'enfant
-    data = Array.from(datas.children);
+    let object = {} // il y aura un objet par ligne  
+    let arData = [] // il y aura un tableau de données par ligne
+    data = Array.from(datas.children);//declarons un tableau d'enfant
+    
     //on supprime le 1 et le 2 du tableau des données
     data.shift()
     data.shift()
+    
     //nous parcourons les données (les valeurs pour chaque pays)
-    data.forEach(function (y) {
+    // saisir chaque élément du tableau 'data' = chaque <td> > et l'appeler 'y' >> exemple d'un y donné = "<td>1012,8</td>"
+    // pousser dans le tableau 'arrData' le parseInt du innerText de 'y' 
+    //>> y.innerText = "1012,8" sous forme de chaîne de caractères, parseInt transformera la chaîne en un nombre.
+    data.forEach(function (y) { 
         arData.push(parseInt(y.innerText))
     })
+    
     //Enregistrons les données dans l'object
     object.data = arData
-    object.label = datas.children[1].innerText
+    object.label = datas.children[1].innerText  // label = innerText de la 2ème colonne de chaque ligne (sauf 1 et 2, nous les avons décalés)
     object.borderColor = getRandomColor()
     object.fill = false
     //Une fois que nous avons enregistre les nouvelles données nous 
