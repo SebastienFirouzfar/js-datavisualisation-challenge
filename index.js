@@ -2,10 +2,10 @@ function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
     for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
+        color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
-  }
+}
 
 
 let dateYear = document.querySelectorAll("#table1 tbody tr")[0] //Selectionnner le tableau d'année pour le mettre dans le graphique 
@@ -28,41 +28,41 @@ let tableau2 = [] // Ici nous voulons insérer tous les objets qui contiendront 
 
 // pour avoir les données de chaque pays nous devons faire celà 
 // créer un tableau composé de tous les <tr> y compris tous ses éléments enfants.
-dataset = Array.from(document.querySelectorAll("#table1 tbody tr")) 
+dataset = Array.from(document.querySelectorAll("#table1 tbody tr"))
 
 dataset.shift() //on supprime le 1er elt
 
- // saisir chaque élément du tableau 'dataset' = chaque ligne du tableau > et l'appeler 'datas'.
+// saisir chaque élément du tableau 'dataset' = chaque ligne du tableau > et l'appeler 'datas'.
 dataset.forEach(function (datas) {
     let object = {} // il y aura un objet par ligne  
     let arData = [] // il y aura un tableau de données par ligne
     data = Array.from(datas.children);//declarons un tableau d'enfant
-    
+
     //on supprime le 1 et le 2 du tableau des données
     data.shift()
     data.shift()
-    
+
     //nous parcourons les données (les valeurs pour chaque pays)
     // saisir chaque élément du tableau 'data' = chaque <td> > et l'appeler 'y' >> exemple d'un y donné = "<td>1012,8</td>"
     // pousser dans le tableau 'arrData' le parseInt du innerText de 'y' 
     //>> y.innerText = "1012,8" sous forme de chaîne de caractères, parseInt transformera la chaîne en un nombre.
-    data.forEach(function (y) { 
+    data.forEach(function (y) {
         arData.push(parseInt(y.innerText))
     })
-    
+
     //Enregistrons les données dans l'object
     object.data = arData
-    object.label = datas.children[1].innerText  // label = innerText de la 2ème colonne de chaque ligne (sauf 1 et 2, nous les avons décalés)
+    object.label = datas.children[1].innerText  //(pays) label = innerText de la 2ème colonne de chaque ligne (sauf 1 et 2, nous les avons décalés)
     object.borderColor = getRandomColor()
     object.fill = false
     //Une fois que nous avons enregistre les nouvelles données nous 
     //pouvons le mettre dans le tableau
     tableau2.push(object)
 
-    console.log(arData)
+   // console.log(arData)
 })
 
-console.log(tableau2)
+//console.log(tableau2)
 
 //Nous allons copier les données qui se trouve 
 //dans le site https://tobiasahlin.com pour ensuite 
@@ -71,7 +71,8 @@ new Chart(document.getElementById("line-chart"), {
     type: 'line',
     data: {
         labels: tableauDateLabel,
-        datasets: tableau2},
+        datasets: tableau2
+    },
     options: {
         title: {
             display: true,
@@ -81,57 +82,54 @@ new Chart(document.getElementById("line-chart"), {
 });
 
 /**********************************************Exo 2************************************/
-let country2 = document.querySelectorAll("#table2 thead tr")[0]
-let tabCountry = []; 
-Array.from(country2.children).forEach(function(countryName){
-    if(countryName.innerHTML.length > 0){
-        tabCountry.push(countryName.innerText); 
-    }
+let country = document.querySelectorAll("#table2 tbody tr") //select the country 
+let tabCountry = [];
+//Parcour tout le pays 
+Array.from(country).forEach(function (countryName) {
+    let newCountry = countryName.children[1]; 
+    tabCountry.push(newCountry.innerText);
 })
-console.log(tabCountry);
-
-let tab2 = []
-dataset2 = Array.from(document.querySelectorAll("#table1 thead tr"))
+console.log(tabCountry)
 
 
-dataset2.forEach(function (datas2) {
-    let object = {}
-    let arData2 = []
-    //declarons un tableau d'enfant
-    data = Array.from(datas2.children);
-    //on supprime le 1 et le 2 du tableau des données
-    data.shift()
-    data.shift()
-    //nous parcourons les données (les valeurs pour chaque pays)
-    data.forEach(function (x) {
-        arData2.push(parseInt(x.innerText))
-    })
-    //Enregistrons les données dans l'object
-    object.data = arData2
-    object.label = datas2.children[1].innerText
-    object.borderColor = getRandomColor()
-    //Une fois que nous avons enregistre les nouvelles données nous 
-    //pouvons le mettre dans le tableau
-    tab2.push(object); 
 
-    console.log(arData2);
+/////////////////////////////////////////////////////// 2007-09
+let tableauExo2 = []
+datasetCountry = Array.from(document.querySelectorAll("#table2 tbody tr")); //select the value of country 
+let object2 = {} // il y aura un objet par ligne  
+let arData2 = [] // il y aura un tableau de données par ligne
+datasetCountry.forEach(function (data) {
+    let newData = data.children[2]; 
+    arData2.push(parseInt(newData.innerText)); 
 })
+object2.label = "2007-09"
+object2.backgroundColor = getRandomColor();
+object2.data = arData2;
+tableauExo2.push(object2)
 
-console.log(tab2);
 
+//////////////////////////////////////////////////////////////2010-12
+let object3 = {} // il y aura un objet par ligne  
+let arData3 = [] // il y aura un tableau de données par ligne
+datasetCountry.forEach(function (data) {
+    let newData = data.children[3]; 
+    arData3.push(parseInt(newData.innerText)); 
+})
+object3.label = "2010-12"
+object3.backgroundColor = getRandomColor();
+object3.data = arData3;
+tableauExo2.push(object3)
 
 new Chart(document.getElementById("bar-chart-grouped"), {
     type: 'bar',
     data: {
-      labels: tabCountry,
-      datasets: tab2
+        labels: tabCountry,
+        datasets: tableauExo2
     },
     options: {
-      title: {
-        display: true,
-        text: 'Population growth (millions)'
-      }
+        title: {
+            display: true,
+            text: 'Population growth (millions)'
+        }
     }
 });
-
-
