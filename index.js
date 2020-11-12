@@ -59,10 +59,10 @@ dataset.forEach(function (datas) {
     //pouvons le mettre dans le tableau
     tableau2.push(object)
 
-   // console.log(arData)
+   console.log(arData)
 })
 
-//console.log(tableau2)
+console.log(tableau2)
 
 //Nous allons copier les données qui se trouve 
 //dans le site https://tobiasahlin.com pour ensuite 
@@ -86,6 +86,7 @@ let country = document.querySelectorAll("#table2 tbody tr") //select the country
 let tabCountry = [];
 //Parcour tout le pays 
 Array.from(country).forEach(function (countryName) {
+    //nous allons prendre le 1er enfant dans le tableau (qui est le pays)
     let newCountry = countryName.children[1]; 
     tabCountry.push(newCountry.innerText);
 })
@@ -94,6 +95,8 @@ console.log(tabCountry)
 
 
 /////////////////////////////////////////////////////// 2007-09
+//vu que nous avons que 2 collones avec des données, nous pouvons prendre la valeur 
+//qui se trouve dans la 2ème collones et la 3ème afin de mettre ça dans le graph
 let tableauExo2 = []
 datasetCountry = Array.from(document.querySelectorAll("#table2 tbody tr")); //select the value of country 
 let object2 = {} // il y aura un objet par ligne  
@@ -109,6 +112,8 @@ tableauExo2.push(object2)
 
 
 //////////////////////////////////////////////////////////////2010-12
+//vu que nous avons que 2 collones avec des données, nous pouvons prendre la valeur 
+//qui se trouve dans la 2ème collones et la 3ème afin de mettre ça dans le graph
 let object3 = {} // il y aura un objet par ligne  
 let arData3 = [] // il y aura un tableau de données par ligne
 datasetCountry.forEach(function (data) {
@@ -133,3 +138,12 @@ new Chart(document.getElementById("bar-chart-grouped"), {
         }
     }
 });
+
+/***********************************************************EXO 3 *****************************************/
+let headingAjax = document.getElementById("firstHeading"); 
+fetch(" https://canvasjs.com/services/data/datapoints.php")
+.then(response => response.json())
+.then(dataAJax => console.log(dataAJax))
+
+
+
