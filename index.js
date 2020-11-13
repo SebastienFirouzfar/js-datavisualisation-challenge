@@ -141,9 +141,17 @@ new Chart(document.getElementById("bar-chart-grouped"), {
 
 /***********************************************************EXO 3 *****************************************/
 let headingAjax = document.getElementById("firstHeading"); 
-fetch(" https://canvasjs.com/services/data/datapoints.php")
+let tableauAjax = []
+fetch(" https://canvasjs.com/services/data/datapoints.php") //avoir l'url de la base de donnée 
+
+//se connecter à l'api .then(response => response.json()) Et verifier que l'url est bien connecter
 .then(response => response.json())
-.then(dataAJax => console.log(dataAJax))
+.then((data)=>{
+    data.forEach(function(a){
+        tableauAjax.push({x:parseInt(a[0]), y:parseInt(a[1])})
+    })
+})
+console.log(tableauAjax)
 
 
 
