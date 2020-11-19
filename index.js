@@ -141,17 +141,47 @@ new Chart(document.getElementById("bar-chart-grouped"), {
 
 /***********************************************************EXO 3 *****************************************/
 let headingAjax = document.getElementById("firstHeading"); 
-let tableauAjax = []
-fetch(" https://canvasjs.com/services/data/datapoints.php") //avoir l'url de la base de donnée 
+headingAjax.insertAdjacentHTML('afterend', '<canvas id="myChart" width="700" height="300"></canvas>')
 
-//se connecter à l'api .then(response => response.json()) Et verifier que l'url est bien connecter
-.then(response => response.json())
-.then((data)=>{
-    data.forEach(function(a){
-        tableauAjax.push({x:parseInt(a[0]), y:parseInt(a[1])})
-    })
-})
-console.log(tableauAjax)
+
+function getData() {
+    let tableauAjax = []
+    fetch(" https://canvasjs.com/services/data/datapoints.php") //avoir l'url de la base de donnée 
+
+        //se connecter à l'api .then(response => response.json()) Et verifier que l'url est bien connecter
+        .then(response => response.json())
+        .then((data) => {
+            data.forEach(function (a) {
+                tableauAjax.push({ x: parseInt(a[0]), y: parseInt(a[1])})
+            })
+            console.log(tableauAjax)
+            graf(tableauAjax)//affiche le graph
+        })
+}
+
+setInterval(getData, 2000);
+
+
+function graf(data) {
+    let ctx = document.getElementById("myChart");
+    let myChart = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                    label: 'Chart 1',
+                    data: data,
+                    showLine: true,
+                    fill: false,
+                    borderColor: 'rgba(0, 200, 0, 1)'
+                },
+
+            ]
+        },
+
+    });
+
+};
+
 
 
 
